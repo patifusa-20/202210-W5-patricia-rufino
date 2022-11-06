@@ -1,3 +1,8 @@
-const foo = 'test';
+import { methodsArray } from './methods.js';
 
-console.log(foo);
+try {
+    let n = -56;
+    console.log(methodsArray(n));
+} catch (error) {
+    console.log(error.message);
+}
