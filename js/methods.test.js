@@ -11,12 +11,12 @@ describe('My length function', () => {
     });
 });
 
-//Segundo caso -> Push
+// //Segundo caso -> Push
 //Le doi un elemento para el array list y espero que me devuelva el array list con dicho elemento añadido en último lugar.
 describe('My push function', () => {
     const newElem = 'berries';
     const expected = 7;
-    test(`Given array, expected ${expected} length`, () => {
+    test(`Given array ${list}, expected ${expected} length`, () => {
         expect(getPush(list, newElem)).toBe(expected);
     });
 });
