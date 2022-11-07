@@ -32,6 +32,7 @@ export const getPop = (arr) => {
             delete arr[i];
         }
     }
+    const valuesToTest = [lastElement, arr];
     // Return that element removed
-    return lastElement;
+    return valuesToTest;
 };

@@ -42,7 +42,17 @@ describe('My push function', () => {
 describe('My pop function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
     const expected = list[5];
-    test(`Given array ${list}, expected ${expected} length`, () => {
-        expect(getPop(list)).toBe(expected);
+    const expectedList = ['orange', undefined, null, 'orange', -4];
+
+    test(`Given array ${list}, expected ${expected} item removed`, () => {
+        const result = getPop(list);
+        const resultItemRemoved = result[0];
+        expect(resultItemRemoved).toBe(expected);
+    });
+
+    test(`Given array ${list}, expected this mutated array ${expectedList} `, () => {
+        const result = getPop(list);
+        const resultArr = result[1];
+        expect(resultArr).toEqual(expectedList);
     });
 });
