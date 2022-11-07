@@ -2,9 +2,10 @@
 export const getLength = (arr) => {
     let counter = 0;
     // Count elements in array
-    do {
+    for (const element of arr) {
+        counter = arr.indexOf(element);
         counter = counter + 1;
-    } while (arr[counter] !== undefined);
+    }
     return counter;
 };
 
@@ -18,4 +19,17 @@ export const getPush = (arr, newE) => {
     }
     // Return the new length of the array
     return getLength(arr);
+};
+
+export const getPop = (arr) => {
+    // Remove last element from array
+    let lastIndex = getLength(arr) - 1;
+    let lastElement = arr[lastIndex];
+    for (let i = 0; i <= lastIndex; i++) {
+        if (i === lastIndex) {
+            delete arr[i];
+        }
+    }
+    // Return that element removed
+    return lastElement;
 };
