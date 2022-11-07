@@ -3,8 +3,8 @@ export const getLength = (arr) => {
     let counter = 0;
     // Count elements in array
     for (const element of arr) {
-        counter = arr.indexOf(element);
-        counter = counter + 1;
+        arr[counter] = element;
+        counter++;
     }
     return counter;
 };
@@ -27,12 +27,52 @@ export const getPop = (arr) => {
     // Remove last element from array
     let lastIndex = getLength(arr) - 1;
     let lastElement = arr[lastIndex];
+    let newArr = [];
     for (let i = 0; i <= lastIndex; i++) {
-        if (i === lastIndex) {
-            delete arr[i];
+        if (i !== lastIndex) {
+            getPush(newArr, arr[i]);
         }
     }
-    const valuesToTest = [lastElement, arr];
+    arr = newArr;
+    const newLength = getLength(arr);
+    const valuesToTest = [lastElement, arr, newLength];
     // Return that element removed
+    return valuesToTest;
+};
+
+export const getUnshift = (arr, newE) => {
+    // Add elements to the beginning of an array
+    let lastIndex = getLength(arr) - 1;
+    for (let i = lastIndex; i >= 0; i--) {
+        let value = arr[i];
+        arr[i + 1] = value;
+        if (i === 0) {
+            arr[i] = newE;
+        }
+    }
+
+    const newLength = getLength(arr);
+    const valuesToTest = [newLength, arr];
+    // Return the new length of the array
+    return valuesToTest;
+};
+
+export const getShift = (arr) => {
+    // Remove the first element from array
+    let removedValue = arr[0];
+    let lastIndex = getLength(arr) - 1;
+    let newArr = [];
+    for (let i = 1; i <= lastIndex; i++) {
+        let value = arr[i];
+        arr[i - 1] = value;
+
+        if (i !== lastIndex + 1) {
+            getPush(newArr, arr[i]);
+        }
+    }
+    arr = newArr;
+    const newLength = getLength(arr);
+    const valuesToTest = [removedValue, arr, newLength];
+    // Return that removed element
     return valuesToTest;
 };
