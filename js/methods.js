@@ -17,8 +17,10 @@ export const getPush = (arr, newE) => {
             arr[i] = newE;
         }
     }
+    const newLength = getLength(arr);
+    const valuesToTest = [newLength, arr];
     // Return the new length of the array
-    return getLength(arr);
+    return valuesToTest;
 };
 
 export const getPop = (arr) => {
