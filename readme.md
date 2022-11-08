@@ -6,7 +6,7 @@
 
 Crea un modulo con funciones que repliquen, sin utilizar ninguno de los métodos ya existentes en el prototipo, los siguientes métodos de array: **_length, push, pop, unshift, shift, some, every, find, filter, map, findIndex, includes, indexOf, reduce, join:_**
 
-<img align="center" width="518" height="818" alt="Javascript methods" src="/assets/javascript_methods.png">
+![Javascript methods with veggies](/assets/javascript_methods_v2.png)
 
 ## Requisitos
 
@@ -21,4 +21,4 @@ https://patricia-challenge-w5.netlify.app/
 
 ## Tecnologías usadas
 
-![Logos of used technologies](/assets/tech_logos.jpg)
+![Logos of used technologies](/assets/tech_logos_v2.jpg)
