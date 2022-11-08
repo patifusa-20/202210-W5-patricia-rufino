@@ -9,18 +9,15 @@ export const getLength = (arr) => {
     return counter;
 };
 
-export const getPush = (arr, newE) => {
+export const getPush = (arr, ...newE) => {
     // Add elements to the end of array
     let newIndex = getLength(arr);
-    for (let i = 0; i <= newIndex; i++) {
-        if (i === newIndex) {
-            arr[i] = newE;
-        }
+    for (const arg of newE) {
+        arr[newIndex] = arg;
+        newIndex++;
     }
-    const newLength = getLength(arr);
-    const valuesToTest = [newLength, arr];
     // Return the new length of the array
-    return valuesToTest;
+    return newIndex;
 };
 
 export const getPop = (arr) => {
@@ -40,22 +37,30 @@ export const getPop = (arr) => {
     return valuesToTest;
 };
 
-export const getUnshift = (arr, newE) => {
+export const getUnshift = (arr, ...newE) => {
     // Add elements to the beginning of an array
-    let lastIndex = getLength(arr) - 1;
-    for (let i = lastIndex; i >= 0; i--) {
+    let countNewElements = getLength(newE);
+    let countArr = getLength(arr) - 1;
+    for (let i = countArr; i >= 0; i--) {
         let value = arr[i];
-        arr[i + 1] = value;
-        if (i === 0) {
-            arr[i] = newE;
-        }
+        arr[i + countNewElements] = value;
+    }
+    let newIndex = 0;
+    for (const arg of newE) {
+        arr[newIndex] = arg;
+        newIndex++;
     }
 
     const newLength = getLength(arr);
-    const valuesToTest = [newLength, arr];
     // Return the new length of the array
-    return valuesToTest;
+    return newLength;
 };
+
+// const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
+// const valToCheck = 'berries';
+// const valToCheck1 = 'almonds';
+// const result = getUnshift(list, valToCheck, valToCheck1);
+// console.log(list);
 
 export const getShift = (arr) => {
     // Remove the first element from array

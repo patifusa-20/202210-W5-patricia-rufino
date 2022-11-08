@@ -44,6 +44,9 @@ describe('My length function', () => {
 describe('My push function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
     const newElem = 'berries';
+    const newElem1 = 'almonds';
+    const newElem2 = 'nuts';
+    const expected = 9;
     const expectedList = [
         'orange',
         undefined,
@@ -51,18 +54,17 @@ describe('My push function', () => {
         'orange',
         -4,
         'lemon',
-        'berries',
+        newElem,
+        newElem1,
+        newElem2,
     ];
-    const expected = expectedList.length;
-    const result = getPush(list, newElem);
-    const resultLength = result[0];
-    const resultArr = result[1];
+    const result = getPush(list, newElem, newElem1, newElem2);
 
-    test(`Given array ${list}, expected ${expected} length`, () => {
-        expect(resultLength).toBe(expected);
+    test(`Given array ${list}, expected length of ${expected}`, () => {
+        expect(result).toBe(expected);
     });
-    test(`Given array ${list}, expected this mutated array ${expectedList} `, () => {
-        expect(resultArr).toEqual(expectedList);
+    test(`Given array ${list}, expected this mutated array ${list} `, () => {
+        expect(list).toEqual(expectedList);
     });
 });
 
@@ -97,9 +99,13 @@ describe('My pop function', () => {
 describe('My unshift function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
     const newElem = 'berries';
-    const expected = 7;
+    const newElem1 = 'almonds';
+    const newElem2 = 'nuts';
+    const expected = 9;
     const expectedList = [
-        'berries',
+        newElem,
+        newElem1,
+        newElem2,
         'orange',
         undefined,
         null,
@@ -107,15 +113,13 @@ describe('My unshift function', () => {
         -4,
         'lemon',
     ];
-    const result = getUnshift(list, newElem);
-    const resultLength = result[0];
-    const resultArr = result[1];
+    const result = getUnshift(list, newElem, newElem1, newElem2);
 
     test(`Given array ${list}, expected ${expected} length`, () => {
-        expect(resultLength).toBe(expected);
+        expect(result).toBe(expected);
     });
     test(`Given array ${list}, expected this mutated array ${expectedList} `, () => {
-        expect(resultArr).toEqual(expectedList);
+        expect(list).toEqual(expectedList);
     });
 });
 
@@ -149,13 +153,13 @@ describe('My shift function', () => {
 describe('My some function', () => {
     const list = ['orange', undefined, null, 'orange', 10, 'lemon'];
     const cases = [
-        ['orange', true],
-        [undefined, true],
-        [null, true],
-        [10, true],
-        ['lemon', true],
-        ['pink', false],
-        [15, false],
+        ['orange', true], //true
+        [undefined, true], //true
+        [null, true], //true
+        [10, true], //true
+        ['lemon', true], //true
+        ['pink', false], //false
+        [15, false], //false
     ];
 
     const checkElements = (element, valToCheck) =>
