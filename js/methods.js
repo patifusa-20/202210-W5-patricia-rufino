@@ -73,3 +73,13 @@ export const getShift = (arr) => {
     // Return that removed element
     return valuesToTest;
 };
+
+export const getSome = (arr, valElement, fnElements) => {
+    // Check if any element in the array meets the condition.
+    let isElement;
+    for (const element of arr) {
+        isElement = fnElements(element, valElement);
+        // Return a boolean
+        return isElement;
+    }
+};

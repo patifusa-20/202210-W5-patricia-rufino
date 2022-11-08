@@ -1,4 +1,11 @@
-import { getLength, getPush, getPop, getUnshift, getShift } from './methods.js';
+import {
+    getLength,
+    getPush,
+    getPop,
+    getUnshift,
+    getShift,
+    getSome,
+} from './methods.js';
 
 //Primer caso -> Length
 //Le doi el array list y espero que me devuelva el nº total de elementos dentro del array.
@@ -112,5 +119,19 @@ describe('My shift function', () => {
     test(`Given array ${list}, expected ${expectedLength} length `, () => {
         const resultLength = result[2];
         expect(resultLength).toBe(expectedLength);
+    });
+});
+
+// Sexto caso -> Some
+//Le doi el array list y espero que me devuelva un valor booleano.
+describe('My some function', () => {
+    const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
+    const valToCheck = 5;
+    const checkElements = (element, valToCheck) => element === valToCheck;
+    const expected = false;
+    const result = getSome(list, valToCheck, checkElements);
+
+    test(`Given value to check ${valToCheck}, expected ${expected} if item exist in ${list}`, () => {
+        expect(result).toBe(expected);
     });
 });
