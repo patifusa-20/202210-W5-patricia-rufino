@@ -60,15 +60,12 @@ export const getUnshift = (arr, newE) => {
 export const getShift = (arr) => {
     // Remove the first element from array
     let removedValue = arr[0];
-    let lastIndex = getLength(arr) - 1;
+    const arrLength = getLength(arr);
     let newArr = [];
-    for (let i = 1; i <= lastIndex; i++) {
+    for (let i = 1; i < arrLength; i++) {
         let value = arr[i];
         arr[i - 1] = value;
-
-        if (i !== lastIndex + 1) {
-            getPush(newArr, arr[i]);
-        }
+        getPush(newArr, arr[i]);
     }
     arr = newArr;
     const newLength = getLength(arr);
