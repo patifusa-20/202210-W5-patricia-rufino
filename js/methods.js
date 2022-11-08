@@ -87,7 +87,16 @@ export const getSome = (arr, valElement, fnElements) => {
     return isElement;
 };
 
-export const getEvery = () => {
+export const getEvery = (arr, valElement, fnElements) => {
     // All elements in array pass the test implemented by the provided function
+    let isElement = true;
+    for (const element of arr) {
+        isElement = fnElements(element, valElement);
+        if (!isElement) {
+            // Return a boolean
+            return isElement;
+        }
+    }
     // Return a boolean value
+    return isElement;
 };

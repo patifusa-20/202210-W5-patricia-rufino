@@ -5,6 +5,7 @@ import {
     getUnshift,
     getShift,
     getSome,
+    getEvery,
 } from './methods.js';
 
 //Primer caso -> Length
@@ -43,7 +44,6 @@ describe('My length function', () => {
 describe('My push function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
     const newElem = 'berries';
-    const expected = 7;
     const expectedList = [
         'orange',
         undefined,
@@ -53,6 +53,7 @@ describe('My push function', () => {
         'lemon',
         'berries',
     ];
+    const expected = expectedList.length;
     const result = getPush(list, newElem);
     const resultLength = result[0];
     const resultArr = result[1];
@@ -171,3 +172,23 @@ describe('My some function', () => {
 
 // Septimo caso -> Every
 //Le doi el array list, un valor y espero que me devuelva un valor booleano.
+describe('My Every function', () => {
+    const list = [12, 45, 528, 325, 5.9, 18];
+    const cases = [
+        [10, false],
+        [529, false],
+        [1.2, true],
+        [4.5, true],
+        [Infinity, false],
+        [NaN, false],
+    ];
+
+    test.each(cases)(
+        `Given the array ${list} ` + 'Every function of %o is %o',
+        (valToCheck, expected) => {
+            const checkElements = (element) => element > valToCheck;
+            const result = getEvery(list, valToCheck, checkElements);
+            expect(result).toBe(expected);
+        }
+    );
+});
