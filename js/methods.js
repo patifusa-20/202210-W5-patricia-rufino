@@ -76,10 +76,27 @@ export const getShift = (arr) => {
 
 export const getSome = (arr, valElement, fnElements) => {
     // Check if any element in the array meets the condition.
-    let isElement;
+    let isElement = false;
     for (const element of arr) {
         isElement = fnElements(element, valElement);
-        // Return a boolean
-        return isElement;
+        if (isElement) {
+            // Return a boolean
+            return isElement;
+        }
     }
+    return isElement;
+};
+
+export const getEvery = (arr, valElement, fnElements) => {
+    // All elements in array pass the test implemented by the provided function
+    let isElement = true;
+    for (const element of arr) {
+        isElement = fnElements(element, valElement);
+        if (!isElement) {
+            // Return a boolean
+            return isElement;
+        }
+    }
+    // Return a boolean value
+    return isElement;
 };
