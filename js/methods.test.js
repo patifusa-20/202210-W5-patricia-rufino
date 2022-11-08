@@ -11,9 +11,30 @@ import {
 //Le doi el array list y espero que me devuelva el nº total de elementos dentro del array.
 describe('My length function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
-    const expected = 6;
-    test(`Given array ${list}, expected ${expected} length`, () => {
-        expect(getLength(list)).toBe(expected);
+    const list1 = [
+        'orange',
+        undefined,
+        null,
+        'orange',
+        -4,
+        'lemon',
+        'orange',
+        undefined,
+        null,
+        'orange',
+        -4,
+        'lemon',
+    ];
+    const list2 = [null, 'orange', -4];
+    const list3 = [];
+    const cases = [
+        [list, list.length],
+        [list1, list1.length],
+        [list2, list2.length],
+        [list3, list3.length],
+    ];
+    test.each(cases)('Length function of %o is %o', (valToCheck, expected) => {
+        expect(getLength(valToCheck)).toBe(expected);
     });
 });
 
@@ -123,15 +144,30 @@ describe('My shift function', () => {
 });
 
 // Sexto caso -> Some
-//Le doi el array list y espero que me devuelva un valor booleano.
+//Le doi el array list, un valor y espero que me devuelva un valor booleano.
 describe('My some function', () => {
-    const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
-    const valToCheck = 5;
-    const checkElements = (element, valToCheck) => element === valToCheck;
-    const expected = false;
-    const result = getSome(list, valToCheck, checkElements);
+    const list = ['orange', undefined, null, 'orange', 10, 'lemon'];
+    const cases = [
+        ['orange', true],
+        [undefined, true],
+        [null, true],
+        [10, true],
+        ['lemon', true],
+        ['pink', false],
+        [15, false],
+    ];
 
-    test(`Given value to check ${valToCheck}, expected ${expected} if item exist in ${list}`, () => {
-        expect(result).toBe(expected);
-    });
+    const checkElements = (element, valToCheck) =>
+        Object.is(element, valToCheck);
+
+    test.each(cases)(
+        `Given the array ${list} ` + 'Some function of %o is %o',
+        (valToCheck, expected) => {
+            const result = getSome(list, valToCheck, checkElements);
+            expect(result).toBe(expected);
+        }
+    );
 });
+
+// Septimo caso -> Every
+//Le doi el array list, un valor y espero que me devuelva un valor booleano.
