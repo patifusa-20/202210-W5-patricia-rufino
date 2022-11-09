@@ -56,12 +56,6 @@ export const getUnshift = (arr, ...newE) => {
     return newLength;
 };
 
-// const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
-// const valToCheck = 'berries';
-// const valToCheck1 = 'almonds';
-// const result = getUnshift(list, valToCheck, valToCheck1);
-// console.log(list);
-
 export const getShift = (arr) => {
     // Remove the first element from array
     let removedValue = arr[0];
