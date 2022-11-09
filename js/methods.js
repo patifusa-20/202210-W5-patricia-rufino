@@ -161,6 +161,20 @@ export const getIncludes = (arr, val) => {
     // Returns boolean
     return false;
 };
+
+export const getIndexOf = (arr, val) => {
+    // First index at which a given element can be found in the array
+    for (let i = 0; i < getLength(arr); i++) {
+        let isElement = arr[i];
+        if (Object.is(isElement, val)) {
+            // Returns index
+            return i;
+        }
+    }
+    // Returns -1 if it is not present.
+    return -1;
+};
+
 const list = [11, 45, -0, NaN, 5.9, 18];
-const value = -0;
-console.log(getIncludes(list, value));
+const value = NaN;
+console.log(getIndexOf(list, value));

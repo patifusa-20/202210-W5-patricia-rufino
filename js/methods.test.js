@@ -11,6 +11,7 @@ import {
     getMap,
     getFindIndex,
     getIncludes,
+    getIndexOf,
 } from './methods.js';
 
 //01 -> Length
@@ -287,6 +288,8 @@ describe('My FindIndex function', () => {
     );
 });
 
+// 12 -> Includes
+//Le doi el array list y un valor y espero que me devuelva un booleano
 describe('My Includes function', () => {
     const list = [11, 45, -0, NaN, 5.9, 18];
     const list1 = [11, 13, 29, 97];
@@ -300,6 +303,26 @@ describe('My Includes function', () => {
         `Given the array %o, the includes function to ${value} is %o`,
         (valToCheck, expected) => {
             const result = getIncludes(valToCheck, value);
+            expect(result).toEqual(expected);
+        }
+    );
+});
+
+// 13 -> IndexOf
+//Le doi el array list y un valor, y espero que me devuelva el índice del elemento si es igual al valor dado.
+describe('My IndexOf function', () => {
+    const list = [11, 45, -0, NaN, 5.9, 18];
+    const list1 = [11, 13, 29, 97];
+    const cases = [
+        [list, 3],
+        [list1, -1],
+    ];
+    const value = NaN;
+
+    test.each(cases)(
+        `Given the array %o, the IndexOf function to ${value} is %o`,
+        (valToCheck, expected) => {
+            const result = getIndexOf(valToCheck, value);
             expect(result).toEqual(expected);
         }
     );
