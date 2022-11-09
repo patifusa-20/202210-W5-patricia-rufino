@@ -6,9 +6,16 @@ import {
     getShift,
     getSome,
     getEvery,
+    getFind,
+    getFilter,
+    getMap,
+    getFindIndex,
+    getIncludes,
+    getIndexOf,
+    getReduce,
 } from './methods.js';
 
-//Primer caso -> Length
+//01 -> Length
 //Le doi el array list y espero que me devuelva el nº total de elementos dentro del array.
 describe('My length function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
@@ -39,36 +46,42 @@ describe('My length function', () => {
     });
 });
 
-// Segundo caso -> Push
+// 02 -> Push
 //Le doi un elemento para el array list y espero que me devuelva el array list con dicho elemento añadido en último lugar.
 describe('My push function', () => {
-    const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
     const newElem = 'berries';
-    const newElem1 = 'almonds';
-    const newElem2 = 'nuts';
-    const expected = 9;
-    const expectedList = [
+    const newElem1 = {};
+    const newElem2 = Infinity;
+    const expected = 7;
+    const expectedList = ['orange', undefined, null, 35, -4, [], newElem];
+    const expected1 = 9;
+    const expectedList1 = [
         'orange',
         undefined,
         null,
-        'orange',
+        35,
         -4,
-        'lemon',
+        [],
         newElem,
         newElem1,
         newElem2,
     ];
-    const result = getPush(list, newElem, newElem1, newElem2);
 
-    test(`Given array ${list}, expected length of ${expected}`, () => {
+    test(`Given array ${expectedList}, if push ${newElem}, the length expected is ${expected} `, () => {
+        const list = ['orange', undefined, null, 35, -4, []];
+        const result = getPush(list, newElem);
         expect(result).toBe(expected);
-    });
-    test(`Given array ${list}, expected this mutated array ${list} `, () => {
         expect(list).toEqual(expectedList);
+    });
+    test(`Given array ${expectedList1}, if push ${newElem}, ${newElem1} and ${newElem2}, the length expected is ${expected1} `, () => {
+        const list = ['orange', undefined, null, 35, -4, []];
+        const result = getPush(list, newElem, newElem1, newElem2);
+        expect(result).toBe(expected1);
+        expect(list).toEqual(expectedList1);
     });
 });
 
-// Tercer caso -> Pop
+// 03 -> Pop
 //Le doi el array list y espero que me devuelva el elemento en último lugar que se ha eliminado de list.
 describe('My pop function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
@@ -94,36 +107,42 @@ describe('My pop function', () => {
     });
 });
 
-// Cuarto caso -> Unshift
+// 04 -> Unshift
 //Le doi un elemento para el array list y espero que me devuelva el array list con dicho elemento añadido en primer lugar.
 describe('My unshift function', () => {
-    const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
     const newElem = 'berries';
     const newElem1 = 'almonds';
     const newElem2 = 'nuts';
-    const expected = 9;
-    const expectedList = [
+    const expected = 7;
+    const expectedList = [newElem, 'orange', undefined, null, 35, -4, 'lemon'];
+    const expected1 = 9;
+    const expectedList1 = [
         newElem,
         newElem1,
         newElem2,
         'orange',
         undefined,
         null,
-        'orange',
+        35,
         -4,
         'lemon',
     ];
-    const result = getUnshift(list, newElem, newElem1, newElem2);
 
-    test(`Given array ${list}, expected ${expected} length`, () => {
+    test(`Given array ${expectedList}, expected ${expected} length`, () => {
+        const list = ['orange', undefined, null, 35, -4, 'lemon'];
+        const result = getUnshift(list, newElem);
         expect(result).toBe(expected);
-    });
-    test(`Given array ${list}, expected this mutated array ${expectedList} `, () => {
         expect(list).toEqual(expectedList);
+    });
+    test(`Given array ${expectedList1}, expected ${expected1} length`, () => {
+        const list = ['orange', undefined, null, 35, -4, 'lemon'];
+        const result = getUnshift(list, newElem, newElem1, newElem2);
+        expect(result).toBe(expected1);
+        expect(list).toEqual(expectedList1);
     });
 });
 
-// Quinto caso -> Shift
+// 05 -> Shift
 //Le doi el array list y espero que me devuelva el elemento en primer lugar que se ha eliminado de list.
 describe('My shift function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
@@ -148,7 +167,7 @@ describe('My shift function', () => {
     });
 });
 
-// Sexto caso -> Some
+// 06 -> Some
 //Le doi el array list, un valor y espero que me devuelva un valor booleano.
 describe('My some function', () => {
     const list = ['orange', undefined, null, 'orange', 10, 'lemon'];
@@ -174,7 +193,7 @@ describe('My some function', () => {
     );
 });
 
-// Septimo caso -> Every
+// 07 -> Every
 //Le doi el array list, un valor y espero que me devuelva un valor booleano.
 describe('My Every function', () => {
     const list = [12, 45, 528, 325, 5.9, 18];
@@ -192,6 +211,139 @@ describe('My Every function', () => {
         (valToCheck, expected) => {
             const checkElements = (element) => element > valToCheck;
             const result = getEvery(list, valToCheck, checkElements);
+            expect(result).toBe(expected);
+        }
+    );
+});
+
+// 08 -> Find
+//Le doi el array list, y espero que me devuelva el primer elemento que cumple con la función dada.
+describe('My Find function', () => {
+    const list = [12, 45, 528, 325, 5.9, 18];
+    const list1 = [12, 45, 28, -65, 5.9, 18];
+    const cases = [
+        [list, 528],
+        [list1, undefined],
+    ];
+
+    test.each(cases)(
+        `Given the array %o` + 'Find function is %o',
+        (valToCheck, expected) => {
+            const checkElements = (element) => element > 50;
+            const result = getFind(valToCheck, checkElements);
+            expect(result).toBe(expected);
+        }
+    );
+});
+
+// 09 -> Filter
+//Le doi el array list, y espero que me devuelva un nuevo array con los elementos que cumplen con la función dada.
+describe('My Filter function', () => {
+    const list = [12, 45, 528, 325, 5.9, 18];
+    const list1 = [];
+    const cases = [
+        [list, [528, 325]],
+        [list1, []],
+    ];
+
+    test.each(cases)(
+        `Given the array %o ` + 'Filter function is %o',
+        (valToCheck, expected) => {
+            const checkElements = (element) => element > 50;
+            const result = getFilter(valToCheck, checkElements);
+            expect(result).toEqual(expected);
+        }
+    );
+});
+
+// 10 -> Map
+//Le doi el array list, y espero que me devuelva un nuevo array con el resultado de pasar la función a cada uno de los elementos del array.
+describe('My Map function', () => {
+    const list = [12, 45, 528, 325, 5.9, 18];
+    const expected = [24, 90, 1056, 650, 11.8, 36];
+
+    test(`Given the array ${list}, the Map function create this new array ${expected}`, () => {
+        const checkElements = (element) => element * 2;
+        const result = getMap(list, checkElements);
+        expect(result).toEqual(expected);
+    });
+});
+
+// 11 -> FindIndex
+//Le doi el array list, y espero que me devuelva un nuevo array con el resultado de pasar la función a cada uno de los elementos del array.
+describe('My FindIndex function', () => {
+    const list = [3, 45, 528, 325, 5.9, 18];
+    const list1 = [11, 13, 29, 97];
+    const cases = [
+        [list, 2],
+        [list1, -1],
+    ];
+
+    test.each(cases)(
+        `Given the array %o ` + 'FindIndex function is %o',
+        (valToCheck, expected) => {
+            const checkElements = (element) => element % 2 === 0;
+            const result = getFindIndex(valToCheck, checkElements);
+            expect(result).toEqual(expected);
+        }
+    );
+});
+
+// 12 -> Includes
+//Le doi el array list y un valor y espero que me devuelva un booleano
+describe('My Includes function', () => {
+    const list = [11, 45, -0, NaN, 5.9, 18];
+    const list1 = [11, 13, 29, 97];
+    const cases = [
+        [list, true],
+        [list1, false],
+    ];
+    const value = NaN;
+
+    test.each(cases)(
+        `Given the array %o, the includes function to ${value} is %o`,
+        (valToCheck, expected) => {
+            const result = getIncludes(valToCheck, value);
+            expect(result).toEqual(expected);
+        }
+    );
+});
+
+// 13 -> IndexOf
+//Le doi el array list y un valor, y espero que me devuelva el índice del elemento si es igual al valor dado.
+describe('My IndexOf function', () => {
+    const list = [11, 45, -0, NaN, 5.9, 18];
+    const list1 = [11, 13, 29, 97];
+    const cases = [
+        [list, 3],
+        [list1, -1],
+    ];
+    const value = NaN;
+
+    test.each(cases)(
+        `Given the array %o, the IndexOf function to ${value} is %o`,
+        (valToCheck, expected) => {
+            const result = getIndexOf(valToCheck, value);
+            expect(result).toEqual(expected);
+        }
+    );
+});
+
+// 14 -> Reduce
+//Le doi el array list y un valor, y espero que me devuelva el índice del elemento si es igual al valor dado.
+describe('My Reduce function', () => {
+    const list = [1, 2, 3, 4, 5, 6];
+    const list1 = [11, 22, 33, 44];
+    const cases = [
+        [list, 21],
+        [list1, 110],
+    ];
+
+    test.each(cases)(
+        `Given the array %o, the Reduce function is expected to return %o`,
+        (valToCheck, expected) => {
+            const checkElements = (element, totalPrev) => totalPrev + element;
+            const result = getReduce(valToCheck, checkElements);
             expect(result).toBe(expected);
         }
     );

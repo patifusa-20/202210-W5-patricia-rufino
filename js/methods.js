@@ -56,12 +56,6 @@ export const getUnshift = (arr, ...newE) => {
     return newLength;
 };
 
-// const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
-// const valToCheck = 'berries';
-// const valToCheck1 = 'almonds';
-// const result = getUnshift(list, valToCheck, valToCheck1);
-// console.log(list);
-
 export const getShift = (arr) => {
     // Remove the first element from array
     let removedValue = arr[0];
@@ -104,4 +98,90 @@ export const getEvery = (arr, valElement, fnElements) => {
     }
     // Return a boolean value
     return isElement;
+};
+
+export const getFind = (arr, fnElements) => {
+    // First element in array that satisfies the provided testing function
+    for (const element of arr) {
+        let isElement = fnElements(element);
+        if (isElement) {
+            // Return the element
+            return element;
+        }
+    }
+    // Return undefined if no values satisfy the testing function
+    return undefined;
+};
+
+export const getFilter = (arr, fnElements) => {
+    // Creates an array with the elements from the given array that pass the provided testing function
+    const newArr = [];
+    for (const element of arr) {
+        let isElement = fnElements(element);
+        if (isElement) {
+            getPush(newArr, element);
+        }
+    }
+    // Return a shallow copy with values that satisfy the testing function or an empty array if no values satisfy the testing function
+    return newArr;
+};
+
+export const getMap = (arr, fnElements) => {
+    // Creates an array with the results of calling a provided function on every element in the calling array.
+    const newArr = [];
+    for (const element of arr) {
+        let isElement = fnElements(element);
+        getPush(newArr, isElement);
+    }
+    // Return a new array with each element being the result of the callback function
+    return newArr;
+};
+
+export const getFindIndex = (arr, fnElements) => {
+    // First element in an array that satisfies the provided testing function
+    for (let i = 0; i < getLength(arr); i++) {
+        let isElement = fnElements(arr[i]);
+        if (isElement) {
+            return i;
+        }
+    }
+    // Returns the index element. If no elements satisfy the testing function, -1 is returned.
+    return -1;
+};
+
+export const getIncludes = (arr, val) => {
+    // Array includes a certain value among its entries
+    for (let i = 0; i < getLength(arr); i++) {
+        let isElement = arr[i];
+        if (Object.is(isElement, val)) {
+            // Returns boolean
+            return true;
+        }
+    }
+    // Returns boolean
+    return false;
+};
+
+export const getIndexOf = (arr, val) => {
+    // First index at which a given element can be found in the array
+    for (let i = 0; i < getLength(arr); i++) {
+        let isElement = arr[i];
+        if (Object.is(isElement, val)) {
+            // Returns index
+            return i;
+        }
+    }
+    // Returns -1 if it is not present.
+    return -1;
+};
+
+export const getReduce = (arr, fnElements) => {
+    // executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element.
+    let totalPrev = 0;
+    for (let i = 0; i < getLength(arr); i++) {
+        fnElements(arr[i], totalPrev);
+        totalPrev = fnElements(arr[i], totalPrev);
+    }
+    // The final result of running the reducer across all elements of the array is a single value.
+    return totalPrev;
 };
