@@ -149,6 +149,18 @@ export const getFindIndex = (arr, fnElements) => {
     return -1;
 };
 
-// const list = [11, 45, 528, 325, 5.9, 18];
-// const checkElements = (element) => element % 2 === 0;
-// console.log(getFindIndex(list, checkElements));
+export const getIncludes = (arr, val) => {
+    // Array includes a certain value among its entries
+    for (let i = 0; i < getLength(arr); i++) {
+        let isElement = arr[i];
+        if (Object.is(isElement, val)) {
+            // Returns boolean
+            return true;
+        }
+    }
+    // Returns boolean
+    return false;
+};
+const list = [11, 45, -0, NaN, 5.9, 18];
+const value = -0;
+console.log(getIncludes(list, value));

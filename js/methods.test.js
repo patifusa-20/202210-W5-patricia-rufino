@@ -10,6 +10,7 @@ import {
     getFilter,
     getMap,
     getFindIndex,
+    getIncludes,
 } from './methods.js';
 
 //01 -> Length
@@ -281,6 +282,24 @@ describe('My FindIndex function', () => {
         (valToCheck, expected) => {
             const checkElements = (element) => element % 2 === 0;
             const result = getFindIndex(valToCheck, checkElements);
+            expect(result).toEqual(expected);
+        }
+    );
+});
+
+describe('My Includes function', () => {
+    const list = [11, 45, -0, NaN, 5.9, 18];
+    const list1 = [11, 13, 29, 97];
+    const cases = [
+        [list, true],
+        [list1, false],
+    ];
+    const value = NaN;
+
+    test.each(cases)(
+        `Given the array %o, the includes function to ${value} is %o`,
+        (valToCheck, expected) => {
+            const result = getIncludes(valToCheck, value);
             expect(result).toEqual(expected);
         }
     );
