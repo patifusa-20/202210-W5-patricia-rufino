@@ -175,6 +175,17 @@ export const getIndexOf = (arr, val) => {
     return -1;
 };
 
-const list = [11, 45, -0, NaN, 5.9, 18];
-const value = NaN;
-console.log(getIndexOf(list, value));
+export const getReduce = (arr, fnElements) => {
+    // executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element.
+    let totalPrev = 0;
+    for (let i = 0; i < getLength(arr); i++) {
+        fnElements(arr[i], totalPrev);
+        totalPrev = fnElements(arr[i], totalPrev);
+    }
+    // The final result of running the reducer across all elements of the array is a single value.
+
+    return totalPrev;
+};
+const list = [1, 2, 3, 4, 5, 6];
+const checkElements = (element, totalPrev) => totalPrev + element;
+console.log(getReduce(list, checkElements));

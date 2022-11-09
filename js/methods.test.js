@@ -12,6 +12,7 @@ import {
     getFindIndex,
     getIncludes,
     getIndexOf,
+    getReduce,
 } from './methods.js';
 
 //01 -> Length
@@ -324,6 +325,26 @@ describe('My IndexOf function', () => {
         (valToCheck, expected) => {
             const result = getIndexOf(valToCheck, value);
             expect(result).toEqual(expected);
+        }
+    );
+});
+
+// 14 -> Reduce
+//Le doi el array list y un valor, y espero que me devuelva el índice del elemento si es igual al valor dado.
+describe('My Reduce function', () => {
+    const list = [1, 2, 3, 4, 5, 6];
+    const list1 = [11, 22, 33, 44];
+    const cases = [
+        [list, 21],
+        [list1, 110],
+    ];
+
+    test.each(cases)(
+        `Given the array %o, the Reduce function is expected to return %o`,
+        (valToCheck, expected) => {
+            const checkElements = (element, totalPrev) => totalPrev + element;
+            const result = getReduce(valToCheck, checkElements);
+            expect(result).toBe(expected);
         }
     );
 });
