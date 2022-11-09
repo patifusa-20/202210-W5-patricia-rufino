@@ -99,3 +99,56 @@ export const getEvery = (arr, valElement, fnElements) => {
     // Return a boolean value
     return isElement;
 };
+
+export const getFind = (arr, fnElements) => {
+    // First element in array that satisfies the provided testing function
+    for (const element of arr) {
+        let isElement = fnElements(element);
+        if (isElement) {
+            // Return the element
+            return element;
+        }
+    }
+    // Return undefined if no values satisfy the testing function
+    return undefined;
+};
+
+export const getFilter = (arr, fnElements) => {
+    // Creates an array with the elements from the given array that pass the provided testing function
+    const newArr = [];
+    for (const element of arr) {
+        let isElement = fnElements(element);
+        if (isElement) {
+            getPush(newArr, element);
+        }
+    }
+    // Return a shallow copy with values that satisfy the testing function or an empty array if no values satisfy the testing function
+    return newArr;
+};
+
+export const getMap = (arr, fnElements) => {
+    // Creates an array with the results of calling a provided function on every element in the calling array.
+    const newArr = [];
+    for (const element of arr) {
+        let isElement = fnElements(element);
+        getPush(newArr, isElement);
+    }
+    // Return a new array with each element being the result of the callback function
+    return newArr;
+};
+
+export const getFindIndex = (arr, fnElements) => {
+    // First element in an array that satisfies the provided testing function
+    for (let i = 0; i < getLength(arr); i++) {
+        let isElement = fnElements(arr[i]);
+        if (isElement) {
+            return i;
+        }
+    }
+    // Returns the index element. If no elements satisfy the testing function, -1 is returned.
+    return -1;
+};
+
+// const list = [11, 45, 528, 325, 5.9, 18];
+// const checkElements = (element) => element % 2 === 0;
+// console.log(getFindIndex(list, checkElements));

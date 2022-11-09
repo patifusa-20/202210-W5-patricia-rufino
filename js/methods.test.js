@@ -6,9 +6,13 @@ import {
     getShift,
     getSome,
     getEvery,
+    getFind,
+    getFilter,
+    getMap,
+    getFindIndex,
 } from './methods.js';
 
-//Primer caso -> Length
+//01 -> Length
 //Le doi el array list y espero que me devuelva el nº total de elementos dentro del array.
 describe('My length function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
@@ -39,7 +43,7 @@ describe('My length function', () => {
     });
 });
 
-// Segundo caso -> Push
+// 02 -> Push
 //Le doi un elemento para el array list y espero que me devuelva el array list con dicho elemento añadido en último lugar.
 describe('My push function', () => {
     const newElem = 'berries';
@@ -74,7 +78,7 @@ describe('My push function', () => {
     });
 });
 
-// Tercer caso -> Pop
+// 03 -> Pop
 //Le doi el array list y espero que me devuelva el elemento en último lugar que se ha eliminado de list.
 describe('My pop function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
@@ -100,7 +104,7 @@ describe('My pop function', () => {
     });
 });
 
-// Cuarto caso -> Unshift
+// 04 -> Unshift
 //Le doi un elemento para el array list y espero que me devuelva el array list con dicho elemento añadido en primer lugar.
 describe('My unshift function', () => {
     const newElem = 'berries';
@@ -135,7 +139,7 @@ describe('My unshift function', () => {
     });
 });
 
-// Quinto caso -> Shift
+// 05 -> Shift
 //Le doi el array list y espero que me devuelva el elemento en primer lugar que se ha eliminado de list.
 describe('My shift function', () => {
     const list = ['orange', undefined, null, 'orange', -4, 'lemon'];
@@ -160,7 +164,7 @@ describe('My shift function', () => {
     });
 });
 
-// Sexto caso -> Some
+// 06 -> Some
 //Le doi el array list, un valor y espero que me devuelva un valor booleano.
 describe('My some function', () => {
     const list = ['orange', undefined, null, 'orange', 10, 'lemon'];
@@ -186,7 +190,7 @@ describe('My some function', () => {
     );
 });
 
-// Septimo caso -> Every
+// 07 -> Every
 //Le doi el array list, un valor y espero que me devuelva un valor booleano.
 describe('My Every function', () => {
     const list = [12, 45, 528, 325, 5.9, 18];
@@ -205,6 +209,79 @@ describe('My Every function', () => {
             const checkElements = (element) => element > valToCheck;
             const result = getEvery(list, valToCheck, checkElements);
             expect(result).toBe(expected);
+        }
+    );
+});
+
+// 08 -> Find
+//Le doi el array list, y espero que me devuelva el primer elemento que cumple con la función dada.
+describe('My Find function', () => {
+    const list = [12, 45, 528, 325, 5.9, 18];
+    const list1 = [12, 45, 28, -65, 5.9, 18];
+    const cases = [
+        [list, 528],
+        [list1, undefined],
+    ];
+
+    test.each(cases)(
+        `Given the array %o` + 'Find function is %o',
+        (valToCheck, expected) => {
+            const checkElements = (element) => element > 50;
+            const result = getFind(valToCheck, checkElements);
+            expect(result).toBe(expected);
+        }
+    );
+});
+
+// 09 -> Filter
+//Le doi el array list, y espero que me devuelva un nuevo array con los elementos que cumplen con la función dada.
+describe('My Filter function', () => {
+    const list = [12, 45, 528, 325, 5.9, 18];
+    const list1 = [];
+    const cases = [
+        [list, [528, 325]],
+        [list1, []],
+    ];
+
+    test.each(cases)(
+        `Given the array %o ` + 'Filter function is %o',
+        (valToCheck, expected) => {
+            const checkElements = (element) => element > 50;
+            const result = getFilter(valToCheck, checkElements);
+            expect(result).toEqual(expected);
+        }
+    );
+});
+
+// 10 -> Map
+//Le doi el array list, y espero que me devuelva un nuevo array con el resultado de pasar la función a cada uno de los elementos del array.
+describe('My Map function', () => {
+    const list = [12, 45, 528, 325, 5.9, 18];
+    const expected = [24, 90, 1056, 650, 11.8, 36];
+
+    test(`Given the array ${list}, the Map function create this new array ${expected}`, () => {
+        const checkElements = (element) => element * 2;
+        const result = getMap(list, checkElements);
+        expect(result).toEqual(expected);
+    });
+});
+
+// 11 -> FindIndex
+//Le doi el array list, y espero que me devuelva un nuevo array con el resultado de pasar la función a cada uno de los elementos del array.
+describe('My FindIndex function', () => {
+    const list = [3, 45, 528, 325, 5.9, 18];
+    const list1 = [11, 13, 29, 97];
+    const cases = [
+        [list, 2],
+        [list1, -1],
+    ];
+
+    test.each(cases)(
+        `Given the array %o ` + 'FindIndex function is %o',
+        (valToCheck, expected) => {
+            const checkElements = (element) => element % 2 === 0;
+            const result = getFindIndex(valToCheck, checkElements);
+            expect(result).toEqual(expected);
         }
     );
 });
