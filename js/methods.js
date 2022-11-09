@@ -183,9 +183,5 @@ export const getReduce = (arr, fnElements) => {
         totalPrev = fnElements(arr[i], totalPrev);
     }
     // The final result of running the reducer across all elements of the array is a single value.
-
     return totalPrev;
 };
-const list = [1, 2, 3, 4, 5, 6];
-const checkElements = (element, totalPrev) => totalPrev + element;
-console.log(getReduce(list, checkElements));
