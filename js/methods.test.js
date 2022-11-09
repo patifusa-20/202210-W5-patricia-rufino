@@ -13,6 +13,7 @@ import {
     getIncludes,
     getIndexOf,
     getReduce,
+    getJoin,
 } from './methods.js';
 
 //01 -> Length
@@ -344,6 +345,25 @@ describe('My Reduce function', () => {
         (valToCheck, expected) => {
             const checkElements = (element, totalPrev) => totalPrev + element;
             const result = getReduce(valToCheck, checkElements);
+            expect(result).toBe(expected);
+        }
+    );
+});
+
+// 15 -> Join
+//Le doi el array list y un separador. Espero que me devuelva un string con todos los elementos del array saparados con el separador (si existe), si no, por comas.
+describe('My Join function', () => {
+    const list = [1, 2, 3];
+    const cases = [
+        ['--', '1--2--3'],
+        ['', '123'],
+        [undefined, '1,2,3'],
+    ];
+
+    test.each(cases)(
+        `Given the array ${list}, the Join function with this separator %o is expected to return %o`,
+        (valToCheck, expected) => {
+            const result = getJoin(list, valToCheck);
             expect(result).toBe(expected);
         }
     );

@@ -176,7 +176,7 @@ export const getIndexOf = (arr, val) => {
 };
 
 export const getReduce = (arr, fnElements) => {
-    // executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element.
+    // Executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element.
     let totalPrev = 0;
     for (let i = 0; i < getLength(arr); i++) {
         fnElements(arr[i], totalPrev);
@@ -184,4 +184,28 @@ export const getReduce = (arr, fnElements) => {
     }
     // The final result of running the reducer across all elements of the array is a single value.
     return totalPrev;
+};
+
+export const getJoin = (arr, separator) => {
+    // Creates a new string by concatenating all of the elements in an array separated by commas or a specified separator string.
+    //If the array has only one item, then that item will be returned without using the separator.
+    let newString;
+    let countArr = getLength(arr) - 1;
+    console.log(countArr);
+    for (let i = countArr; i >= 0; i--) {
+        if (i !== countArr) {
+            if (separator && separator !== undefined) {
+                newString = arr[i] + separator + newString;
+            } else if (separator === undefined) {
+                separator = ',';
+                newString = arr[i] + separator + newString;
+            } else {
+                newString = separator + arr[i] + newString;
+            }
+        } else {
+            newString = arr[i];
+        }
+    }
+    // Returns a new string with separator
+    return newString;
 };
