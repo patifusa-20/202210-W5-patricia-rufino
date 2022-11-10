@@ -17,7 +17,7 @@ Crea un modulo con funciones que repliquen, sin utilizar ninguno de los métodos
 
 ## Resultado
 
-https://patricia-challenge-w5.netlify.app/
+https://sonarcloud.io/summary/overall?id=patifusa-20_202211-W5-patricia-rufino
 
 ## Tecnologías usadas
 
