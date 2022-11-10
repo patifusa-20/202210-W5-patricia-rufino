@@ -175,9 +175,9 @@ export const getIndexOf = (arr, val) => {
     return -1;
 };
 
-export const getReduce = (arr, fnElements) => {
+export const getReduce = (arr, fnElements, initVal) => {
     // Executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element.
-    let totalPrev = 0;
+    let totalPrev = initVal;
     for (let i = 0; i < getLength(arr); i++) {
         fnElements(arr[i], totalPrev);
         totalPrev = fnElements(arr[i], totalPrev);

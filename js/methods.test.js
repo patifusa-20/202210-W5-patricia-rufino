@@ -333,18 +333,19 @@ describe('My IndexOf function', () => {
 // 14 -> Reduce
 //Le doi el array list y un valor, y espero que me devuelva el índice del elemento si es igual al valor dado.
 describe('My Reduce function', () => {
-    const list = [1, 2, 3, 4, 5, 6];
+    const list = [1, 2, 3, 4];
     const list1 = [11, 22, 33, 44];
     const cases = [
-        [list, 21],
-        [list1, 110],
+        [list, -10],
+        [list1, -110],
     ];
+    const initialVal = 0;
 
     test.each(cases)(
         `Given the array %o, the Reduce function is expected to return %o`,
         (valToCheck, expected) => {
-            const checkElements = (element, totalPrev) => totalPrev + element;
-            const result = getReduce(valToCheck, checkElements);
+            const checkElements = (element, totalPrev) => totalPrev - element;
+            const result = getReduce(valToCheck, checkElements, initialVal);
             expect(result).toBe(expected);
         }
     );
